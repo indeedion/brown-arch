@@ -1,0 +1,10 @@
+#!/bin/bash
+
+case $1 in
+	
+	-r)
+	coll "#$(echo $RANDOM | md5sum | head -c6)" ;;
+
+	*)
+	echo -e '\033]10;'$1'\007' ;;
+esac

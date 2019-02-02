@@ -41,9 +41,8 @@ mkdir -p /home/$user/Documents
 
 #install vbox guest additions
 packages="virtualbox-guest-iso virtualbox-guest-modules-arch"
-if [ ! pacman -S $packages ]; then
-    echo "failed to install virtualbox guest packages.."
-else
+pacman -S $packages
+if pacman -Qi "$packages"; then	
     mkdir -p /mnt/vboxtmp
     mount /usr/lib/virtualbox/additions/VBoxGuestAdditions.iso /mnt/vboxtmp
     cp /mnt/vboxtmp/VBoxLinuxAdditions.run /tmp
@@ -51,6 +50,8 @@ else
     ./VBoxLinuxAdditions.run &&
     umount /mnt/vboxtmp
     rm VBoxLinuxAdditions.run
+else
+    echo "virtualbox guest packages failed to install"
 fi
 
 #setup sudo
@@ -92,7 +93,7 @@ cp -R Bin /home/$user
 cp configs/bash_profile /home/$user/.bash_profile
 cp configs/bashrc /home/$user/.bashrc
 cp configs/Xresources /home/$user/.Xresources
-cp configs/xinitrc /home$user/.xinitrc
+cp configs/xinitrc /home/$user/.xinitrc
 cp -R configs/i3 /home/$user/.i3
 cp -R configs/config /home/$user/.config
 cp configs/nanorc /home/$user/.nanorc

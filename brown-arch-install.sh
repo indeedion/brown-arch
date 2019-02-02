@@ -4,7 +4,7 @@
 #DEPENDENCIES: a clean functioning arch-install
 
 #global vars
-TMP_PATH="$PWD/brown-arch"
+TMP_PATH="$PWD"
 
 #adding user
 read -p "Username: " user
@@ -38,17 +38,6 @@ pacman -S $packages
 mkdir -p /home/$user
 mkdir -p /home/$user/Desktop
 mkdir -p /home/$user/Documents
-mkdir -p /home/$user/Bin
-mkdir -p /home/$user/Pictures/wallpapers
-mkdir -p /home/$user/.config/i3blocks
-chown -R "$user":"$user" /home/$user
-
-#configure scripts
-chmod +x $TMP_PATH/Bin/*
-
-#DEGUB POINT
-exit 0
-#configure configs
 
 #install vbox guest additions
 packages="virtualbox-guest-iso virtualbox-guest-modules-arch"
@@ -97,9 +86,27 @@ fi
 #set banner of the day
 echo "Welcome to the brownest arch!" > /etc/motd
 
-#install files
+#install user files
 cd $TMP_PATH
 cp -R Bin /home/$user
+cp configs/bash_profile /home/$user/.bash_profile
+cp configs/bashrc /home/$user/.bashrc
+cp configs/Xresources /home/$user/.Xresources
+cp configs/xinitrc /home$user/.xinitrc
+cp -R configs/i3 /home/$user/.i3
+cp -R configs/config /home/$user/.config
+cp configs/nanorc /home/$user/.nanorc
+cp configs/vimrc /home/$user/.vimrc
+cp -R Pictures /home/$user
+
+
+#change ownership of all user files
+chown -R "$user":"$user" /home/$user
+
+#install fonts
+mkdir -p /usr/share/fonts/TTF
+cp fonts/TTF/* /usr/share/fonts/TTF
+
 #TO BE CONTINUED
 #do hardening stuff here
 

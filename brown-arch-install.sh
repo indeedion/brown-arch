@@ -43,9 +43,6 @@ mkdir -p /home/$user/Pictures/wallpapers
 mkdir -p /home/$user/.config/i3blocks
 chown -R "$user":"$user" /home/$user
 
-#switch to brown-arch dir
-cd $TMP_PATH
-
 #configure scripts
 chmod +x $TMP_PATH/Bin/*
 

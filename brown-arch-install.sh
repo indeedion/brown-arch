@@ -38,6 +38,8 @@ pacman -S $packages
 mkdir -p /home/$user
 mkdir -p /home/$user/Desktop
 mkdir -p /home/$user/Documents
+mkdir -p /home/$user/Pictures
+mkdir -p /home/$user/Downloads
 
 #install vbox guest additions
 packages="virtualbox-guest-iso virtualbox-guest-modules-arch"
@@ -86,23 +88,6 @@ fi
 
 #set banner of the day
 echo "Welcome to the brownest arch!" > /etc/motd
-
-#install user files
-cd $TMP_PATH
-cp -R Bin /home/$user
-cp configs/bash_profile /home/$user/.bash_profile
-cp configs/bashrc /home/$user/.bashrc
-cp configs/Xresources /home/$user/.Xresources
-cp configs/xinitrc /home/$user/.xinitrc
-cp -R configs/i3 /home/$user/.i3
-cp -R configs/config /home/$user/.config
-cp configs/nanorc /home/$user/.nanorc
-cp configs/vimrc /home/$user/.vimrc
-cp -R Pictures /home/$user
-
-
-#change ownership of all user files
-chown -R "$user":"$user" /home/$user
 
 #install fonts
 mkdir -p /usr/share/fonts/TTF

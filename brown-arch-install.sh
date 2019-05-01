@@ -61,10 +61,9 @@ chmod +x strap.sh
 
 #install basic pentesting tools
 echo "INSATLLING PeNtEsTiNg TOOLS"
-packages=$(<barch-packages)
-if [ ! pacman -S $packages ]; then
-    echo "failed to install some or alla haxor packages"
-fi
+packages=$(<$PWD/barch-packages)
+pacman -S $packages
+
 
 #set banner of the day
 echo "Welcome to the brownest arch!" > /etc/motd

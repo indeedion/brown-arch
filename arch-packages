@@ -1,4 +1,4 @@
-freetyp2
+freetype2
 libglvnd
 ffmpeg
 xorg
@@ -9,8 +9,6 @@ i3-gaps
 rxvt-unicode
 qutebrowser
 xcompmgr
-git
-vim
 openssl
 openssh
 i3blocks
@@ -21,7 +19,6 @@ linux-headers
 gcc
 make
 perl
-sudo
 i3status
 irssi
 xdotool

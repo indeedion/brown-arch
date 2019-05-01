@@ -25,13 +25,7 @@ fi
 pacman -Syyu
 
 #install basic packages
-pacman -S freetype2 libglvnd ffmpeg
-pacman -S xorg xorg-xinit
-
-packages="ranger nitrogen i3-gaps rxvt-unicode qutebrowser xcompmgr git vim openssl
-openssh i3blocks alsa-utils pulseaudio pavucontrol linux-headers gcc make perl sudo i3status
-irssi xdotool dmenu"
-
+packages=$(<arch-packages)
 pacman -S $packages
 
 #create home directory tree
@@ -81,7 +75,7 @@ chmod +x strap.sh
 ./strap.sh
 
 #install basic pentesting tools
-packages="nmap aircrack-ng hydra john"
+packages=$(<barch-packages)
 if [ ! pacman -S $packages ]; then
     echo "failed to install some or alla haxor packages"
 fi

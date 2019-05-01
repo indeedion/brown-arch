@@ -66,7 +66,7 @@ echo "Welcome to the brownest arch!" > /etc/motd
 
 #setting up x
 cd
-cp /etc/X11/xinit/xinitrc .xinitrc
+cp /etc/X11/xinit/xinitrc ./.xinitrc
 touch .Xauthority
 sed '/^twm/d' .xinitrc
 sed '/^xclock/d' .xinitrc

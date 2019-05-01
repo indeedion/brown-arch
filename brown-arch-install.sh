@@ -56,8 +56,8 @@ else
     echo "blackarch strap.sh sha1sum is valid."
 fi
 
-chmod +x strap.sh
-./strap.sh
+chmod +x $PWD/.strap.sh
+$PWD./strap.sh
 
 #install basic pentesting tools
 echo "INSATLLING PeNtEsTiNg TOOLS"
@@ -68,9 +68,6 @@ pacman -S $packages
 #set banner of the day
 echo "Welcome to the brownest arch!" > /etc/motd
 
-#install fonts
-mkdir -p /usr/share/fonts/TTF
-cp ./fonts/TTF/* /usr/share/fonts/TTF
 
 #TO BE CONTINUED
 #do hardening stuff here

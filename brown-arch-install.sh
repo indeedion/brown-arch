@@ -6,6 +6,7 @@
 
 #global vars
 INSTALL_ROOT="$PWD"
+user=$(whoami)
 echo "root: $INSTALL_ROOT"
 
 #get internet connection
@@ -34,19 +35,6 @@ cp /mnt/vboxiso/VBoxLinuxAdditions.run /tmp
 chmod +x /tmp/VBoxLinuxAdditions.run
 cd /tmp
 ./VBoxLinuxAdditions.run
-#packages="virtualbox-guest-iso virtualbox-guest-modules-arch"
-#pacman -S $packages
-#if pacman -Qi "$packages"; then	
-#    mkdir -p /mnt/vboxtmp
-#    mount /usr/lib/virtualbox/additions/VBoxGuestAdditions.iso /mnt/vboxtmp
-#    cp /mnt/vboxtmp/VBoxLinuxAdditions.run /tmp
-#    cd /tmp
-#    ./VBoxLinuxAdditions.run &&
-#    umount /mnt/vboxtmp
-#    rm VBoxLinuxAdditions.run
-#else
-#    echo "virtualbox guest packages failed to install"
-#fi
 
 #add blackarch repository
 cd $INSTALL_ROOT
@@ -77,7 +65,14 @@ pacman -S $packages
 echo "Welcome to the brownest arch!" > /etc/motd
 
 #setting up x
-cp /etc/X11/xinit/xinitrc ~/.xinitrc
+cd
+cp /etc/X11/xinit/xinitrc .xinitrc
+touch .Xauthority
+sed '/^twm/d' .xinitrc
+sed '/^xclock/d' .xinitrc
+sed '/^xterm/d' .xinitrc
+sed '/^exec/d' .xinitrc
+echo "exec i3" >> .xinitrc
 
 #TO BE CONTINUED
 #do hardening stuff here

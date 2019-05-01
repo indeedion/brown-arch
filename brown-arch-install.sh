@@ -1,25 +1,11 @@
 #!/bin/bash
 
-#PURPOSE: Main install script for brown-arch environment
+#PURPOSE: Main install script for brown-arch base environment
 #DEPENDENCIES: a clean functioning arch-install
+#USAGE: Run this script with sudo logged in as user. DO NOT RUN AS ROOT!
 
 #global vars
 TMP_PATH="$PWD"
-
-
-#adding user
-read -p "Username: " user
-groupadd $user
-useradd -g $user $user
-passwd $user
-
-#create home directory tree
-mkdir -p /home/$user
-mkdir -p /home/$user/Desktop
-mkdir -p /home/$user/Documents
-mkdir -p /home/$user/Pictures
-mkdir -p /home/$user/Downloads
-
 
 #get internet connection
 dhcpcd
@@ -38,15 +24,6 @@ pacman -Syyu
 echo "INSTALLING BASIC PACKAGES"
 packages=$(<arch-packages)
 pacman -S $packages
-
-#copy xserver stuff to user
-cp /root/.Xauth* /home/$user/
-chown -hR $user:$user /home/$use
-
-#setup sudo
-sed -i "/root ALL=(ALL) ALL/a$user ALL=(ALL) ALL" /etc/sudoers
-groupadd sudo
-usermod -a -G sudo $user
 
 #install vbox guest additions
 #packages="virtualbox-guest-iso virtualbox-guest-modules-arch"

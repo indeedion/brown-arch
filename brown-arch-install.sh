@@ -5,13 +5,14 @@
 #USAGE: Run this script with sudo logged in as user. DO NOT RUN AS ROOT!
 
 #global vars
-TMP_PATH="$PWD"
+INSTALL_ROOT="$PWD"
+echo "root: $INSTALL_ROOT"
 
 #get internet connection
 dhcpcd
 
 #test internet connection
-if [ ! ping -c2 8.8.8.8 ]; then
+if [ ! ping -c 2 8.8.8.8 ]; then
     echo "No connection to internet!"
     exit 1
 fi
@@ -41,7 +42,7 @@ pacman -S $packages
 #fi
 
 #add blackarch repository
-cd /tmp
+cd $INSTALL_ROOT
 curl -O https://blackarch.org/strap.sh
 #check sha1sum, should match 9f770789df3b7803105e5fbc19212889674cd503
 sum="9f770789df3b7803105e5fbc19212889674cd503 strap.sh" 
@@ -56,12 +57,12 @@ else
     echo "blackarch strap.sh sha1sum is valid."
 fi
 
-chmod +x $PWD/.strap.sh
-$PWD./strap.sh
+chmod +x $INSTALL_ROOT/strap.sh
+./strap.sh
 
 #install basic pentesting tools
 echo "INSATLLING PeNtEsTiNg TOOLS"
-packages=$(<$PWD/barch-packages)
+packages=$(<barch-packages)
 pacman -S $packages
 
 

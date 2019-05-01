@@ -20,10 +20,6 @@ mkdir -p /home/$user/Documents
 mkdir -p /home/$user/Pictures
 mkdir -p /home/$user/Downloads
 
-#setup sudo
-sed -i "/root ALL=(ALL) ALL/a$user ALL=(ALL) ALL" /etc/sudoers
-groupadd sudo
-usermod -a -G sudo $user
 
 #get internet connection
 dhcpcd
@@ -38,14 +34,19 @@ fi
 echo "UPGRADING SYSTEM"
 pacman -Syyu
 
-#log into user
-echo "LOG IN AS USER"
-su -$user
-
 #install basic packages
 echo "INSTALLING BASIC PACKAGES"
 packages=$(<arch-packages)
 pacman -S $packages
+
+#copy xserver stuff to user
+cp /root/.Xauth* /home/$user/
+chown -hR $user:$user /home/$use
+
+#setup sudo
+sed -i "/root ALL=(ALL) ALL/a$user ALL=(ALL) ALL" /etc/sudoers
+groupadd sudo
+usermod -a -G sudo $user
 
 #install vbox guest additions
 #packages="virtualbox-guest-iso virtualbox-guest-modules-arch"

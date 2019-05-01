@@ -27,6 +27,13 @@ packages=$(<arch-packages)
 pacman -S $packages
 
 #install vbox guest additions
+pacman -S virtualbox-guest-iso
+mkdir -p /mnt/vboxiso
+mount /usr/lib/virtualbox/additions/VBoxGuestAdditions.iso /mnt/vboxiso
+cp /mnt/vboxiso/VBoxLinuxAdditions.run /tmp
+chmod +x /tmp/VBoxLinuxAdditions.run
+cd /tmp
+./VBoxLinuxAdditions.run
 #packages="virtualbox-guest-iso virtualbox-guest-modules-arch"
 #pacman -S $packages
 #if pacman -Qi "$packages"; then	
@@ -69,6 +76,8 @@ pacman -S $packages
 #set banner of the day
 echo "Welcome to the brownest arch!" > /etc/motd
 
+#setting up x
+cp /etc/X11/xinit/xinitrc ~/.xinitrc
 
 #TO BE CONTINUED
 #do hardening stuff here

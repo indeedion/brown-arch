@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ $# -lt 1 ]; then
+    echo "USAGE: statusf <font-name, font-size> do not use file-extension in font name"
+    exit 1
+fi
+
+sed -i "/font xft:/c\font xft:$1 $2" $HOME/.i3/config
+
+xdotool key Super_L+shift+r
+

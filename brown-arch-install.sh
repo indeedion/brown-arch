@@ -7,16 +7,16 @@
 #global vars
 INSTALL_ROOT="$PWD"
 
-read -p "Enter username" user
+read -p "Install brownarch to user: " user
 
 #get internet connection
 dhcpcd
 
-#test internet connection
-if [ ! $(ping -c 2 8.8.8.8) ]; then
-    echo "No connection to internet!"
-    exit 1
-fi
+#test internet connection DOES NOT WORK, needs fixing
+#if [ ! $(ping -c 2 8.8.8.8) ]; then
+#    echo "No connection to internet!"
+#    exit 1
+#fi
 
 #upgrade system
 echo "UPGRADING SYSTEM"
@@ -56,7 +56,7 @@ chmod +x $INSTALL_ROOT/strap.sh
 ./strap.sh
 
 #install basic pentesting tools
-echo "INSATLLING PeNtEsTiNg TOOLS"
+echo "INSTALLING PeNtEsTiNg TOOLS"
 packages=$(<barch-packages)
 pacman -S $packages
 
@@ -74,11 +74,19 @@ touch /home/$user/.Xauthority
 
 mkdir -p /home/$user/.config/i3blocks
 mkdir -p /home/$user/.config/i3
+mkdir -p /home/$user/Pictures/wallpapers
+mkdir -p /home/$user/.brownarch/bin
 cp i3blocks_cfg /home/$user/.config/i3blocks/config
 cp i3config /home/$user/.config/i3/config
+cp $INSTALL_ROOT/walls/* /home/$user/Pictures/wallpapers
+cp $INSTALL_ROOT/bin/* /home/$user/.brownarch/bin
+cp $INSTALL_ROOT/fonts/* /usr/share/fonts/TTF
 
 #give user rights to home folder
 chown -R $user:$user /home/$user
+
+#add brownarch scripts to path
+PATH=$PATH:/home/$user/.brownarch/bin
 
 #TO BE CONTINUED
 #do hardening stuff here

@@ -64,15 +64,15 @@ pacman -S $packages
 #set banner of the day
 echo "Welcome to the brownest arch!" > /etc/motd
 
-#setting up x
-cd
-cp /etc/X11/xinit/xinitrc ./.xinitrc
-touch .Xauthority
-sed '/^twm/d' .xinitrc
-sed '/^xclock/d' .xinitrc
-sed '/^xterm/d' .xinitrc
-sed '/^exec/d' .xinitrc
-echo "exec i3" >> .xinitrc
+#install configs
+cd $INSTALL_ROOT/cfg
+cp nanorc /home/$user/.nanorc
+cp vimrc /home/$user/.vimrc
+cp Xresources /home/$user/.Xresources
+touch /home/$user/.Xauthority
+
+mkdir -p /home/$user/.config/i3blocks
+cp i3blocks_cfg /home/$user/.config/i3blocks/config
 
 #TO BE CONTINUED
 #do hardening stuff here

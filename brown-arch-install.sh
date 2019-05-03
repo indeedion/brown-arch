@@ -73,7 +73,12 @@ cp xinitrc /home/$user/.xinitrc
 touch /home/$user/.Xauthority
 
 mkdir -p /home/$user/.config/i3blocks
+mkdir -p /home/$user/.config/i3
 cp i3blocks_cfg /home/$user/.config/i3blocks/config
+cp i3config /home/$user/.config/i3/config
+
+#give user rights to home folder
+chown -R $user:$user /home/$user
 
 #TO BE CONTINUED
 #do hardening stuff here

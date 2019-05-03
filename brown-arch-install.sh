@@ -6,14 +6,14 @@
 
 #global vars
 INSTALL_ROOT="$PWD"
-user=$(whoami)
-echo "root: $INSTALL_ROOT"
+
+read -p "Enter username" user
 
 #get internet connection
 dhcpcd
 
 #test internet connection
-if [ ! ping -c 2 8.8.8.8 ]; then
+if [ ! $(ping -c 2 8.8.8.8) ]; then
     echo "No connection to internet!"
     exit 1
 fi
@@ -69,6 +69,7 @@ cd $INSTALL_ROOT/cfg
 cp nanorc /home/$user/.nanorc
 cp vimrc /home/$user/.vimrc
 cp Xresources /home/$user/.Xresources
+cp xinitrc /home/$user/.xinitrc
 touch /home/$user/.Xauthority
 
 mkdir -p /home/$user/.config/i3blocks

@@ -1,8 +1,0 @@
-#update PATH
-export PATH=$PATH:$HOME/.brownarch/bin
-
-#Prompt colors
-export PS1="\033[0;33m[\u@\[\h]\W$\033[0;0m "
-
-#random startup collor
-coll -r

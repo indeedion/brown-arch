@@ -80,6 +80,10 @@ bindsym $mod+v split v
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
+# change wallpaper
+bindsym $mod+i exec --no-startup-id wall_prev
+bindsym $mod+o exec --no-startup-id wall_next
+
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed

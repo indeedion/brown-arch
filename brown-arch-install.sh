@@ -66,11 +66,13 @@ echo "Welcome to the brownest arch!" > /etc/motd
 
 #install configs
 cd $INSTALL_ROOT/cfg
-cp nanorc /home/$user/.nanorc
-cp vimrc /home/$user/.vimrc
-cp Xresources /home/$user/.Xresources
-cp xinitrc /home/$user/.xinitrc
-touch /home/$user/.Xauthority
+cp .nanorc /home/$user/
+cp .vimrc /home/$user/
+cp .Xresources /home/$user/
+cp .xinitrc /home/$user/
+cp .Xauthority /home/$user/
+cp .bash_profile /home/$user/
+cp .bashrc /home/$user/
 
 mkdir -p /home/$user/.config/i3blocks
 mkdir -p /home/$user/.config/i3

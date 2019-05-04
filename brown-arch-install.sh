@@ -76,6 +76,7 @@ mkdir -p /home/$user/.config/i3blocks
 mkdir -p /home/$user/.config/i3
 mkdir -p /home/$user/Pictures/wallpapers
 mkdir -p /home/$user/.brownarch/bin
+mkdir -p /usr/share/fonts/TTF
 cp i3blocks_cfg /home/$user/.config/i3blocks/config
 cp i3config /home/$user/.config/i3/config
 cp $INSTALL_ROOT/walls/* /home/$user/Pictures/wallpapers

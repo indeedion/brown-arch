@@ -13,10 +13,10 @@ echo "WELCOME"
 echo "Welcome to the brown arch installer!"
 echo "Brown arch can be installed as a regular host or as a virtualbox guest."
 echo "While the install should work on other virtual platforms, such as VMware," 
-echo " it does not install any drivers or guest additions for such a platform."
+echo "It does not install any drivers or guest additions for such a platform."
 echo "If you install to a different platform than a regular host or "
 echo "a virtualbox guest machine, you will have to install guest additions and/or drivers yourself."
-
+echo ""
 echo "CHOOSE EXISTING USER"
 read -p "Install brownarch to user: " user
 
@@ -38,7 +38,7 @@ pacman -Syyu
 clear
 echo "INSTALLING BASIC PACKAGES"
 packages=$(<arch-packages)
-yes | pacman -S $packages
+pacman -S $packages
 
 clear
 echo "VIRTUALIZATION"
@@ -77,7 +77,6 @@ case $virtual in
     *)
 	;;
 esac
->>>>>>> f995c4992cee3fd8ad0d16846beb1dec271d5e59
 
 #add blackarch repository
 clear
@@ -104,7 +103,7 @@ chmod +x $INSTALL_ROOT/strap.sh
 clear
 echo "INSTALLING PeNtEsTiNg TOOLS"
 packages=$(<barch-packages)
-yes | pacman -S $packages
+pacman -S $packages
 
 # enable network manager
 systemctl enable NetworkManager

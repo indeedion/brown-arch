@@ -6,6 +6,7 @@
 
 #global vars
 INSTALL_ROOT="$PWD"
+IS_VIRTUAL="false"
 
 read -p "Install brownarch to user: " user
 
@@ -27,14 +28,43 @@ echo "INSTALLING BASIC PACKAGES"
 packages=$(<arch-packages)
 pacman -S $packages
 
-#install vbox guest additions
-pacman -S virtualbox-guest-iso
-mkdir -p /mnt/vboxiso
-mount /usr/lib/virtualbox/additions/VBoxGuestAdditions.iso /mnt/vboxiso
-cp /mnt/vboxiso/VBoxLinuxAdditions.run /tmp
-chmod +x /tmp/VBoxLinuxAdditions.run
-cd /tmp
-./VBoxLinuxAdditions.run
+clear
+echo "VIRTUALIZATION"
+read -p "for the moment brownarch only supports virtualbox as hypervisor, are you installing to
+a virtualbox machine? [yes/no]: " virtual
+
+function install_virt(){
+    #installs virtualbox guest additions
+    IS_VIRTUAL="true"
+
+    pacman -S virtualbox-guest-iso
+    mkdir -p /mnt/vboxiso
+    mount /usr/lib/virtualbox/additions/VBoxGuestAdditions.iso /mnt/vboxiso
+    cp /mnt/vboxiso/VBoxLinuxAdditions.run /tmp
+    chmod +x /tmp/VBoxLinuxAdditions.run
+    cd /tmp
+    ./VBoxLinuxAdditions.run
+}
+
+case $virtual in
+    yes)
+	install_virt
+	;;
+    y)
+	install_virt
+	;;
+    Y)
+	install_virt
+	;;
+    YES)
+	install_virt
+	;;
+    Yes)
+	install_virt
+	;;
+    *)
+	;;
+esac
 
 #add blackarch repository
 cd $INSTALL_ROOT
@@ -92,8 +122,10 @@ cp $INSTALL_ROOT/fonts/* /usr/share/fonts/TTF
 chown -R $user:$user /home/$user
 
 #framebuffer resolution for grub(needed for fullscreen in virtualbox)
-sed -i '/GRUB_GFXMODE=/c\GRUB_GFXMODE=1920x1080x24' /etc/default/grub
-sed -i '/GRUB_GFXPAYLOAD_LINUX=/c\GRUB_GFXPAYLOAD_LINUX=keep' /etc/default/grub
+if [ $IS_VIRTUAL = "true"  ]; then
+    sed -i '/GRUB_GFXMODE=/c\GRUB_GFXMODE=1920x1080x24' /etc/default/grub
+    sed -i '/GRUB_GFXPAYLOAD_LINUX=/c\GRUB_GFXPAYLOAD_LINUX=keep' /etc/default/grub
+fi
 
 #TO BE CONTINUED
 #do hardening stuff here

@@ -25,10 +25,10 @@ pacman -Syyu
 #install basic packages
 echo "INSTALLING BASIC PACKAGES"
 packages=$(<arch-packages)
-pacman -S $packages
+yes | pacman -S $packages
 
 #install vbox guest additions
-pacman -S virtualbox-guest-iso
+yes | pacman -S virtualbox-guest-iso
 mkdir -p /mnt/vboxiso
 mount /usr/lib/virtualbox/additions/VBoxGuestAdditions.iso /mnt/vboxiso
 cp /mnt/vboxiso/VBoxLinuxAdditions.run /tmp
@@ -58,7 +58,7 @@ chmod +x $INSTALL_ROOT/strap.sh
 #install basic pentesting tools
 echo "INSTALLING PeNtEsTiNg TOOLS"
 packages=$(<barch-packages)
-pacman -S $packages
+yes | pacman -S $packages
 
 # enable network manager
 systemctl enable NetworkManager

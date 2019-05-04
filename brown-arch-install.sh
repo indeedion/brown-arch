@@ -6,7 +6,7 @@
 
 #global vars
 INSTALL_ROOT="$PWD"
-IS_VIRTUAL="falsei"
+IS_VIRTUAL="false"
 
 clear
 echo "WELCOME"
@@ -30,24 +30,16 @@ dhcpcd
 #fi
 
 #upgrade system
+clear
 echo "UPGRADING SYSTEM"
 pacman -Syyu
 
 #install basic packages
+clear
 echo "INSTALLING BASIC PACKAGES"
 packages=$(<arch-packages)
 yes | pacman -S $packages
 
-<<<<<<< HEAD
-#install vbox guest additions
-yes | pacman -S virtualbox-guest-iso
-mkdir -p /mnt/vboxiso
-mount /usr/lib/virtualbox/additions/VBoxGuestAdditions.iso /mnt/vboxiso
-cp /mnt/vboxiso/VBoxLinuxAdditions.run /tmp
-chmod +x /tmp/VBoxLinuxAdditions.run
-cd /tmp
-./VBoxLinuxAdditions.run
-=======
 clear
 echo "VIRTUALIZATION"
 read -p "for the moment brownarch only supports virtualbox as hypervisor, are you installing to
@@ -88,6 +80,7 @@ esac
 >>>>>>> f995c4992cee3fd8ad0d16846beb1dec271d5e59
 
 #add blackarch repository
+clear
 echo "INSTALLING BLACK ARCH"
 cd $INSTALL_ROOT
 curl -O https://blackarch.org/strap.sh
@@ -108,6 +101,7 @@ chmod +x $INSTALL_ROOT/strap.sh
 ./strap.sh
 
 #install basic pentesting tools
+clear
 echo "INSTALLING PeNtEsTiNg TOOLS"
 packages=$(<barch-packages)
 yes | pacman -S $packages

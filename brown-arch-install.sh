@@ -6,7 +6,18 @@
 
 #global vars
 INSTALL_ROOT="$PWD"
+IS_VIRTUAL="falsei"
 
+clear
+echo "WELCOME"
+echo "Welcome to the brown arch installer!"
+echo "Brown arch can be installed as a regular host or as a virtualbox guest."
+echo "While the install should work on other virtual platforms, such as VMware," 
+echo " it does not install any drivers or guest additions for such a platform."
+echo "If you install to a different platform than a regular host or "
+echo "a virtualbox guest machine, you will have to install guest additions and/or drivers yourself."
+
+echo "CHOOSE EXISTING USER"
 read -p "Install brownarch to user: " user
 
 #get internet connection
@@ -27,6 +38,7 @@ echo "INSTALLING BASIC PACKAGES"
 packages=$(<arch-packages)
 yes | pacman -S $packages
 
+<<<<<<< HEAD
 #install vbox guest additions
 yes | pacman -S virtualbox-guest-iso
 mkdir -p /mnt/vboxiso
@@ -35,8 +47,48 @@ cp /mnt/vboxiso/VBoxLinuxAdditions.run /tmp
 chmod +x /tmp/VBoxLinuxAdditions.run
 cd /tmp
 ./VBoxLinuxAdditions.run
+=======
+clear
+echo "VIRTUALIZATION"
+read -p "for the moment brownarch only supports virtualbox as hypervisor, are you installing to
+a virtualbox machine? [yes/no]: " virtual
+
+function install_virt(){
+    #installs virtualbox guest additions
+    IS_VIRTUAL="true"
+
+    pacman -S virtualbox-guest-iso
+    mkdir -p /mnt/vboxiso
+    mount /usr/lib/virtualbox/additions/VBoxGuestAdditions.iso /mnt/vboxiso
+    cp /mnt/vboxiso/VBoxLinuxAdditions.run /tmp
+    chmod +x /tmp/VBoxLinuxAdditions.run
+    cd /tmp
+    ./VBoxLinuxAdditions.run
+}
+
+case $virtual in
+    yes)
+	install_virt
+	;;
+    y)
+	install_virt
+	;;
+    Y)
+	install_virt
+	;;
+    YES)
+	install_virt
+	;;
+    Yes)
+	install_virt
+	;;
+    *)
+	;;
+esac
+>>>>>>> f995c4992cee3fd8ad0d16846beb1dec271d5e59
 
 #add blackarch repository
+echo "INSTALLING BLACK ARCH"
 cd $INSTALL_ROOT
 curl -O https://blackarch.org/strap.sh
 #check sha1sum, should match 9f770789df3b7803105e5fbc19212889674cd503
@@ -92,8 +144,10 @@ cp $INSTALL_ROOT/fonts/* /usr/share/fonts/TTF
 chown -R $user:$user /home/$user
 
 #framebuffer resolution for grub(needed for fullscreen in virtualbox)
-sed -i '/GRUB_GFXMODE=/c\GRUB_GFXMODE=1920x1080x24' /etc/default/grub
-sed -i '/GRUB_GFXPAYLOAD_LINUX=/c\GRUB_GFXPAYLOAD_LINUX=keep' /etc/default/grub
+if [ $IS_VIRTUAL = "true"  ]; then
+    sed -i '/GRUB_GFXMODE=/c\GRUB_GFXMODE=1920x1080x24' /etc/default/grub
+    sed -i '/GRUB_GFXPAYLOAD_LINUX=/c\GRUB_GFXPAYLOAD_LINUX=keep' /etc/default/grub
+fi
 
 #TO BE CONTINUED
 #do hardening stuff here

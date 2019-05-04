@@ -6,8 +6,18 @@
 
 #global vars
 INSTALL_ROOT="$PWD"
-IS_VIRTUAL="false"
+IS_VIRTUAL="falsei"
 
+clear
+echo "WELCOME"
+echo "Welcome to the brown arch installer!"
+echo "Brown arch can be installed as a regular host or as a virtualbox guest."
+echo "While the install should work on other virtual platforms, such as VMware," 
+echo " it does not install any drivers or guest additions for such a platform."
+echo "If you install to a different platform than a regular host or "
+echo "a virtualbox guest machine, you will have to install guest additions and/or drivers yourself."
+
+echo "CHOOSE EXISTING USER"
 read -p "Install brownarch to user: " user
 
 #get internet connection
@@ -67,6 +77,7 @@ case $virtual in
 esac
 
 #add blackarch repository
+echo "INSTALLING BLACK ARCH"
 cd $INSTALL_ROOT
 curl -O https://blackarch.org/strap.sh
 #check sha1sum, should match 9f770789df3b7803105e5fbc19212889674cd503

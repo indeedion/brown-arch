@@ -85,9 +85,6 @@ cp $INSTALL_ROOT/fonts/* /usr/share/fonts/TTF
 #give user rights to home folder
 chown -R $user:$user /home/$user
 
-#add brownarch scripts to path
-PATH=$PATH:/home/$user/.brownarch/bin
-
 #framebuffer resolution for grub(needed for fullscreen in virtualbox)
 sed -i '/GRUB_GFXMODE=/c\GRUB_GFXMODE=1920x1080x24' /etc/default/grub
 sed -i '/GRUB_GFXPAYLOAD_LINUX=/c\GRUB_GFXPAYLOAD_LINUX=keep' /etc/default/grub

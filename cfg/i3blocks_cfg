@@ -33,26 +33,33 @@ markup=none
 # The first parameter sets the step (and units to display)
 # The second parameter overrides the mixer selection
 # See the script for details.
-[volume]
-label=VOL
+#[volume]
+#label=VOL
 #label=♪
-instance=Master
+#instance=Master
 #instance=PCM
-interval=once
-signal=10
+#interval=once
+#signal=10
 
 #Public IP
 [pubip]
 label=Public IP:
-command=$HOME/Bin/ippub
-interval=30
+command=$HOME/.brownarch/bin/ippub
+interval=10
+color=#00FF00
+
+#Lan-IP
+[lanip]
+label=Lan IP:
+command=$HOME/.brownarch/bin/iplan
+interval=10
 color=#00FF00
 
 #Tunnel IP
 [tunip]
 label=Tunnel IP:
-command=$HOME/Bin/iptun
-interval=30
+command=$HOME/.brownarch/bin/iptun
+interval=10
 color=#00FF00
 
 # Memory usage
@@ -62,6 +69,7 @@ color=#00FF00
 label=ram
 separator=false
 interval=30
+color=#00FFFF
 
 #[memory]
 #label=SWAP
@@ -78,25 +86,26 @@ interval=30
 label=home
 instance=/home
 interval=30
+color=#00FFFF
 
 # Network interface monitoring
 #
 # If the instance is not specified, use the interface used for default route.
 # The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
-[iface]
+#[iface]
 #instance=wlan0
-color=#00FF00
-interval=10
-separator=false
+#color=#00FF00
+#interval=10
+#separator=false
 
-[wifi]
+#[wifi]
 #instance=wlp3s0
-interval=10
-separator=false
+#interval=10
+#separator=false
 
-[bandwidth]
+#[bandwidth]
 #instance=eth0
-interval=5
+#interval=5
 
 # CPU usage
 #
@@ -125,6 +134,7 @@ min_width=CPU: 100.00%
 [time]
 command=date '+%Y-%m-%d %H:%M:%S'
 interval=5
+color=#00FFFF
 
 # Generic media player support
 #

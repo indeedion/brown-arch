@@ -259,5 +259,9 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
+# Autostart applications
+exec --no-startup-id nitrogen --restore; sleep 1; xcompmgr -c
+exec --no-startup-id nm-applet
+
 
 

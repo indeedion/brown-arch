@@ -1,0 +1,3 @@
+#!/bin/bash
+
+ip address | grep brd | grep inet | cut -d " " -f 6

@@ -23,4 +23,7 @@ i3status
 irssi
 xdotool
 dmenu
-
+network-manager-applet
+nm-connection-editor
+networkmanager
+networkmanager-openvpn

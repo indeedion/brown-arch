@@ -60,6 +60,9 @@ echo "INSTALLING PeNtEsTiNg TOOLS"
 packages=$(<barch-packages)
 pacman -S $packages
 
+# enable network manager
+systemctl enable NetworkManager
+systemctl start NetworkManager
 
 #set banner of the day
 echo "Welcome to the brownest arch!" > /etc/motd
